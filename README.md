@@ -22,14 +22,14 @@
 |Column              |Type        |Options                         |
 |--------------------|------------|--------------------------------|
 | name               | string     | null: false                    |
-| explanation        | string     | null: false                    |
+| explanation        | text       | null: false                    |
 | category_id        | integer    | null: false                    |
 | condition_id       | integer    | null: false                    |
 | shipping_cost_id   | integer    | null: false                    |
 | shipping_area_id   | integer    | null: false                    |
 | shipping_time_id   | integer    | null: false                    |
 | price              | integer    | null: false                    |
-| user_id            | references | null: false, foreign_key: true |
+| user               | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
@@ -40,14 +40,14 @@
 ## purchase_recordsテーブル
 |Column              |Type        |Options                         |
 |--------------------|------------|--------------------------------|
-| user_id            | references | null: false, foreign_key: true |
-| item_id            | references | null: false, foreign_key: true |
+| user               | references | null: false, foreign_key: true |
+| item               | references | null: false, foreign_key: true |
 
 
 ### Association
 - belongs_to :user
 - belongs_to :item
-- has_one :shipping_addresses
+- has_one :shipping_address
 
 
 
@@ -61,6 +61,7 @@
 | address          | string      | null: false                    |
 | building_name    | string      |                                |
 | phone_number     | string      | null: false                    |
+| purchase_record  | references  | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :purchase_record
