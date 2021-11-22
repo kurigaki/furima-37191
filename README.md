@@ -4,7 +4,6 @@
 |--------------------|--------|-------------|
 | nickname           | string | null: false |
 | email              | string | null: false |
-| password           | string | null: false |
 | encrypted_password | string | null: false |
 | last_name          | string | null: false |
 | first_name         | string | null: false |
@@ -22,14 +21,14 @@
 
 |Column              |Type        |Options                         |
 |--------------------|------------|--------------------------------|
-| item_name          | string     | null: false                    |
-| item_explanation   | string     | null: false                    |
+| name               | string     | null: false                    |
+| explanation        | string     | null: false                    |
 | category_id        | integer    | null: false                    |
-| Item_condition_id  | integer    | null: false                    |
+| condition_id       | integer    | null: false                    |
 | shipping_cost_id   | integer    | null: false                    |
 | shipping_area_id   | integer    | null: false                    |
 | shipping_time_id   | integer    | null: false                    |
-| price              | type       | null: false                    |
+| price              | integer    | null: false                    |
 | user_id            | references | null: false, foreign_key: true |
 
 ### Association
@@ -48,20 +47,20 @@
 ### Association
 - belongs_to :user
 - belongs_to :item
-- has_many :shipping_addresses
+- has_one :shipping_addresses
 
 
 
 
 ## shipping_addressesテーブル
-|Column            |Type        |Options                         |
-|------------------|------------|--------------------------------|
-| postal_code      | string     | null: false                    |
-| shipping_area_id | string     | null: false                    |
-| municipalities   | string     | null: false                    |
-| address          | string     | null: false                    |
-| building_name    | string     |                                |
-| phone_number     | string     | null: false                    |
+|Column            |Type         |Options                         |
+|------------------|-------------|--------------------------------|
+| postal_code      | string      | null: false                    |
+| shipping_area_id | integer     | null: false                    |
+| municipalities   | string      | null: false                    |
+| address          | string      | null: false                    |
+| building_name    | string      |                                |
+| phone_number     | string      | null: false                    |
 
 ### Association
 - belongs_to :purchase_record
