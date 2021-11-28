@@ -5,7 +5,6 @@ RSpec.describe Item, type: :model do
     @item = FactoryBot.build(:item)
   end
 
-
   describe '商品出品機能のテスト' do
     context '新規登録できる場合' do
       it '必要な情報を適切に入力して「出品する」ボタンを押すと、商品情報がデータベースに保存されること。' do
@@ -61,17 +60,17 @@ RSpec.describe Item, type: :model do
       it '価格は、¥300~¥9,999,999の間のみ保存可能であること。' do
         @item.price = 100
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+        expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
       it '価格は、¥300~¥9,999,999の間のみ保存可能であること。' do
-        @item.price = 100000000
+        @item.price = 100_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+        expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
       it '価格は半角数値のみ保存可能であること。' do
         @item.price = '１１１１１１'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it 'カテゴリーに「---」が選択されている場合は出品できない' do
         @item.category_id = 1
