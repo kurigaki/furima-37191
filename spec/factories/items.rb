@@ -14,6 +14,3 @@ FactoryBot.define do
     price             { Faker::Number.between(from: 300, to: 9_999_999) }
   end
 end
-
-
-sleep(1)
