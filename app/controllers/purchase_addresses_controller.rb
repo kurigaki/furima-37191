@@ -1,4 +1,5 @@
 class PurchaseAddressesController < ApplicationController
+  before_action :move_to_index,only: [:index, :create]
   def index
     @item = Item.find(params[:item_id])
     @purchase_address = PurchaseAddress.new
@@ -32,6 +33,15 @@ class PurchaseAddressesController < ApplicationController
       card: purchase_address_params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
+  end
+
+  def move_to_index
+    @item = Item.find(params[:item_id])
+    if user_signed_in?
+    redirect_to root_path if @item.purchase_record.present?
+    else
+      redirect_to new_user_session_path
+    end
   end
 
 end
