@@ -1,7 +1,7 @@
 class PurchaseAddress
   include ActiveModel::Model
   attr_accessor :user_id, :item_id, :postal_code, :shipping_area_id, :municipalities, :address, :building_name, :phone_number,
-                :purchase_record
+                :purchase_record, :token
 
   # ここにバリデーションの処理を書く
   validates :user_id, presence: true
@@ -11,6 +11,7 @@ class PurchaseAddress
   validates :municipalities, presence: true
   validates :address, presence: true
   validates :phone_number, format: { with: /\A\d{10,11}\z/ }
+  validates :token, presence: true
 
   def save
     # 各テーブルにデータを保存する処理を書く
