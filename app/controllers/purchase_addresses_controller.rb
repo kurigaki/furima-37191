@@ -1,6 +1,6 @@
 class PurchaseAddressesController < ApplicationController
-  before_action :set_item, only: [:index,:create]
-  before_action :move_to_index,only: [:index, :create]
+  before_action :set_item, only: [:index, :create]
+  before_action :move_to_index, only: [:index, :create]
   def index
     @purchase_address = PurchaseAddress.new
   end
@@ -26,17 +26,17 @@ class PurchaseAddressesController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: @item.price,  # 商品の値段
-      card: purchase_address_params[:token],    # カードトークン
+      card: purchase_address_params[:token], # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
   end
 
   def move_to_index
     if user_signed_in?
-    redirect_to root_path if current_user.id != @item.user_id || @item.purchase_record.present?
+      redirect_to root_path if current_user.id != @item.user_id || @item.purchase_record.present?
     else
       redirect_to new_user_session_path
     end
@@ -45,5 +45,4 @@ class PurchaseAddressesController < ApplicationController
   def set_item
     @item = Item.find(params[:item_id])
   end
-
 end
