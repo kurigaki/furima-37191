@@ -36,7 +36,7 @@ class PurchaseAddressesController < ApplicationController
 
   def move_to_index
     if user_signed_in?
-    redirect_to root_path if @item.purchase_record.present?
+    redirect_to root_path if current_user.id != @item.user_id || @item.purchase_record.present?
     else
       redirect_to new_user_session_path
     end
