@@ -4,14 +4,16 @@ class PurchaseAddress
                 :purchase_record, :token
 
   # ここにバリデーションの処理を書く
-  validates :user_id, presence: true
-  validates :item_id, presence: true
+  with_options presence: true do
+  validates :user_id
+  validates :item_id
   validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Include hyphen(-)' }
   validates :shipping_area_id, numericality: { other_than: 0, message: "can't be blank" }
-  validates :municipalities, presence: true
-  validates :address, presence: true
+  validates :municipalities
+  validates :address
   validates :phone_number, format: { with: /\A\d{10,11}\z/ }
-  validates :token, presence: true
+  validates :token
+  end
 
   def save
     # 各テーブルにデータを保存する処理を書く
