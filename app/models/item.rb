@@ -13,7 +13,7 @@ class Item < ApplicationRecord
   validates :image, presence: true
   validates :name, presence: true
   validates :explanation, presence: true
-  validates :category_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :category_id, numericality: { other_than: 0, message: "can't be blank" }
   validates :condition_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :shipping_area_id, numericality: { other_than: 0, message: "can't be blank" }
   validates :shipping_cost_id, numericality: { other_than: 1, message: "can't be blank" }
