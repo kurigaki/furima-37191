@@ -27,15 +27,34 @@
     <%= f.submit '検索' %>
   <% end %>
   <ul class='item-lists' id="detailed-search-result">
-    <% @items.each do |item| %>
+      <% @items.each do |item| %>
       <li class='list'>
-        <div class="posted-content">
-          <%= image_tag item.image, class: "item-img"%><br>
-          <%= item.name%><br>
-          <%= link_to '詳細', item_path(item.id)%>
+        <%= link_to item_path(item.id) do %>
+        <div class='item-img-content'>
+          <%= image_tag item.image, class: "item-img" %>
+
+          <% if item.purchase_record.present? %>
+          <div class='sold-out'>
+            <span>Sold Out!!</span>
+          </div>
+          <% end %>
+
         </div>
+        <div class='item-info'>
+          <h3 class='item-name'>
+            <%= item.name %>
+          </h3>
+          <div class='item-price'>
+            <span><%= item.price %>円<br><%= item.shipping_cost.name %></span>
+            <div class='star-btn'>
+              <%= image_tag "star.png", class:"star-icon" %>
+              <span class='star-count'>0</span>
+            </div>
+          </div>
+        </div>
+        <% end %>
       </li>
-    <% end %>
+      <% end %>
   </ul>
 </div>
 
